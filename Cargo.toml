@@ -7,4 +7,6 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.4.11", features = ["derive", "env"] }
+libflate = "2.0.0"
+sha-1 = "0.10.1"
 thiserror = "1.0.50"
