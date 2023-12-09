@@ -27,9 +27,9 @@ fn hash_blob(content: impl AsRef<[u8]>) -> Vec<u8> {
     let content = content.as_ref();
     let header = format!("blob {}", content.len());
     let mut hasher = Sha1::new();
-    hasher.update(&header);
+    hasher.update(header);
     hasher.update(b"\0");
-    hasher.update(&content);
+    hasher.update(content);
     hasher.finalize().into_iter().collect()
 }
 
@@ -37,7 +37,7 @@ fn encode_blob(content: impl AsRef<[u8]>) -> Result<Vec<u8>, HashObjectError> {
     let content = content.as_ref();
     let mut encoder = zlib::Encoder::new(Vec::new())?;
     encoder.write_all(format!("blob {}", content.len()).as_bytes())?;
-    encoder.write(&[0])?;
+    encoder.write_all(&[0])?;
     encoder.write_all(content)?;
     Ok(encoder.finish().into_result()?)
 }
